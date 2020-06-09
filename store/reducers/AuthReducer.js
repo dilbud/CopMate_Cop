@@ -1,4 +1,4 @@
-import { LOGOUT } from '../actions/auth';
+import { LOGOUT } from '../actions/AuthAction';
 
 const initialState = {
   userId: null

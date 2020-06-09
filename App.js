@@ -7,9 +7,10 @@ import { Provider } from 'react-redux';
 
 import { navigationRef } from './RootNavigation';
 import UserNavigation from './navigation/UserNavigation';
+import AuthReducer from './store/reducers/AuthReducer'
 
 const rootReducer = combineReducers({
-
+  Auth: AuthReducer
 });
 
 const store = createStore(rootReducer);

@@ -5,6 +5,6 @@ export const signup = (email, password) => {
     dispatch({ type: SIGNUP });
 }
 
-export const LOGIN = (email, password) => {
-    dispatch({ type: LOGIN,  });
+export const login = (email, password) => {
+    dispatch({ type: LOGIN, });
 }
