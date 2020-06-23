@@ -1,23 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
 
-export default HomeScreen = ({ navigation }) => {
-
-    const dispatch = useDispatch();
-    const availableMeals = useSelector(state => state);
-
+export default SignUpScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <Text>Home Screen</Text>
+                <Text>SignUp Screen</Text>
             </View>
             <Button
-                title="Go to User"
-                onPress={() => {
-                    navigation.navigate('User')
-                }}
+                title="Go to Login"
+                onPress={() => navigation.navigate('Login')}
             />
         </SafeAreaView>
 

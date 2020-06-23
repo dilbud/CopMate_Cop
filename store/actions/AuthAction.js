@@ -2,9 +2,21 @@ export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
 
 export const signup = (email, password) => {
-    dispatch({ type: SIGNUP });
+    return {
+        type: SIGNUP, payload: {
+
+        }
+    };
 }
 
 export const login = (email, password) => {
-    dispatch({ type: LOGIN, });
+    return (dispatch, getState) => {
+        // async action 
+        dispatch({
+            type: LOGIN,
+            payload: {
+                token: 'token'
+            }
+        });
+    }
 }
