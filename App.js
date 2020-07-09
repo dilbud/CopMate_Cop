@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 // navigation
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -12,22 +12,30 @@ import { navigationRef } from './RootNavigation';
 import UserNavigation from './navigation/UserNavigation';
 import AuthNavigation from './navigation/AuthNavigation';
 // reducer imports
-import AuthReducer from './store/reducers/AuthReducer'
+import AuthReducer from './store/reducers/AuthReducer';
 // combine reducers
 const rootReducer = combineReducers({
-  Auth: AuthReducer
+  Auth: AuthReducer,
 });
 // create store with middleware
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // render app
 export default function App() {
+  const [isSignedIn, setisSignedIn] = useState(true);
+
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <NavigationContainer
-          ref={navigationRef}>
-          {/* <AuthNavigation /> */}
-          <UserNavigation />
+        <NavigationContainer ref={navigationRef}>
+          {isSignedIn ? (
+            <>
+              <UserNavigation />
+            </>
+          ) : (
+            <>
+              <AuthNavigation />
+            </>
+          )}
         </NavigationContainer>
       </SafeAreaProvider>
     </Provider>

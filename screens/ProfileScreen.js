@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 export default HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const availableMeals = useSelector((state) => state);
-
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text>Home Screen</Text>
+        <Text>profile Screen</Text>
       </View>
-      <Button title="Go to User" onPress={() => {}} />
+      <Button
+        title="Go to User"
+        onPress={() => {
+        }}
+      />
     </SafeAreaView>
   );
 };
