@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default UserNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="login"
       mode="card"
       screenOptions={{
         headerStyle: { backgroundColor: 'papayawhip' },

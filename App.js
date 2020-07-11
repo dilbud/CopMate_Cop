@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // render app
 export default function App() {
-  const [isSignedIn, setisSignedIn] = useState(true);
+  const [isSignedIn, setisSignedIn] = useState(false);
 
   return (
     <Provider store={store}>
