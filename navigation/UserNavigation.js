@@ -4,44 +4,78 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Icon01 from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import FormScreen from '../screens/FormScreen';
+import FineScreen from '../screens/FineScreen';
+import SubmitScreen from '../screens/SubmitScreen';
+
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import DrawerContent from '../screens/DrawerContent';
 
 const Drawer = createDrawerNavigator();
 
-const HomeStack = createStackNavigator();
+const Stack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
-  <HomeStack.Navigator
+  <Stack.Navigator
+    initialRouteName="form"
+    mode="card"
     screenOptions={{
-      headerStyle: {
-        backgroundColor: '#009387',
+      headerStyle: { backgroundColor: 'papayawhip' },
+      gestureEnabled: true,
+      gestureDirection: 'horizontal',
+      gestureResponseDistance: {
+        horizontal: 300,
       },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
+      cardStyleInterpolator: ({ current, next, layouts }) => {
+        return {
+          cardStyle: {
+            transform: [
+              {
+                translateX: current.progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [layouts.screen.width, 0],
+                }),
+              },
+            ],
+          },
+          overlayStyle: {
+            opacity: current.progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, 0.5],
+            }),
+          },
+        };
       },
     }}
   >
-    <HomeStack.Screen
-      name="Home"
-      component={HomeScreen}
+    <Stack.Screen
+      name="form"
+      component={FormScreen}
       options={{
-        title: 'Home',
+        title: 'Details',
         headerLeft: () => (
           <Icon01.Button
             style={{ marginLeft: 15 }}
             name="ios-menu"
             size={25}
-            backgroundColor="#009387"
+            backgroundColor="transparent"
+            color="black"
             onPress={() => navigation.openDrawer()}
           />
         ),
       }}
     />
-  </HomeStack.Navigator>
+    <Stack.Screen name="fine" component={FineScreen} />
+    <Stack.Screen
+      name="submit"
+      component={SubmitScreen}
+      options={{
+        title: 'Submit',
+      }}
+    />
+  </Stack.Navigator>
 );
 
 const ProfileStackScreen = ({ navigation }) => (
@@ -77,7 +111,6 @@ const ProfileStackScreen = ({ navigation }) => (
 export default UserNavigation = () => {
   return (
     <Drawer.Navigator
-      openByDefault
       overlayColor="#dbd9ff69"
       activeTintColor="#4300f9"
       drawerStyle={{

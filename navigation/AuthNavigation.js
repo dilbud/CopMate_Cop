@@ -8,7 +8,7 @@ import QrScreen from '../screens/QrScreen';
 
 const Stack = createStackNavigator();
 
-export default UserNavigation = () => {
+export default AuthNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="login"
