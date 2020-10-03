@@ -12,11 +12,11 @@ export default FormScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const fine = useSelector((state) => state.Fine);
 
-  const [nic, setNic] = useState('');
-  const [licenseNumber, setLicenseNumber] = useState('');
+  const [nic, setNic] = useState('96');
+  const [licenseNumber, setLicenseNumber] = useState('15');
 
   const next = () => {
-    dispatch(setForm(nic, licenseNumber, setNic, setLicenseNumber));
+    dispatch(setForm(nic, licenseNumber));
   };
 
   return (

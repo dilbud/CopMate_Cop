@@ -10,6 +10,7 @@ import {
 const initialState = {
   nic: '',
   licenseId: '',
+  name: '',
   // image: null,
   fine: [],
   state: true,
@@ -22,6 +23,7 @@ export default (state = initialState, action) => {
         ...state,
         nic: action.payload.nic,
         licenseId: action.payload.licenseId,
+        name: action.payload.name,
       };
     // case SET_IMAGE:
     //   return { ...state, image: action.payload };

@@ -5,31 +5,38 @@ export const SET_STATE = 'SET_STATE';
 export const SUBMIT = 'SUBMIT';
 export const RESET = 'RESET';
 
+import { Alert } from 'react-native';
 import { navigate } from '../../RootNavigation';
 import axios from '../../api/axios';
 
-export const setForm = (nic, licenseId, setNic, setLicenseNumber, alert) => {
+export const setForm = (nic, licenseId) => {
   return (dispatch, getState) => {
     const current = getState();
     axios
       .post('/fine/validLicense', { nic, licenseId })
       .then((res) => {
-        console.log(res.data.msg);
-        dispatch({
-          type: SET_FORM,
-          payload: { nic, licenseId },
-        });
-        navigate('fine');
+        console.log('output', res.data.msg);
+        if (res.data.msg) {
+          dispatch({
+            type: SET_FORM,
+            payload: { nic, licenseId, name: res.data.name },
+          });
+          navigate('fine');
+        } else {
+          Alert.alert('licence validation', 'licence not found');
+          dispatch({
+            type: RESET,
+          });
+          navigate('form');
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log('form : ', error);
         dispatch({
           type: RESET,
         });
         navigate('form');
       });
-    setNic('');
-    setLicenseNumber('');
   };
 };
 
