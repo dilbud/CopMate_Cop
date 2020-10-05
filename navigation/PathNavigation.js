@@ -6,7 +6,7 @@ import UserNavigation from './UserNavigation';
 import AuthNavigation from './AuthNavigation';
 
 export default PathNavigation = () => {
-  const [isSignedIn, setisSignedIn] = useState(true);
+  const [isSignedIn, setisSignedIn] = useState(false);
   return (
     <NavigationContainer ref={navigationRef}>
       {isSignedIn ? (
@@ -14,10 +14,10 @@ export default PathNavigation = () => {
           <UserNavigation />
         </>
       ) : (
-        <>
-          <AuthNavigation />
-        </>
-      )}
+          <>
+            <AuthNavigation />
+          </>
+        )}
     </NavigationContainer>
   );
 };

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Input } from 'react-native-elements';
 
-export default SubmitScreen = ({ navigation }) => {
+export default SubmitScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
-  const availableMeals = useSelector((state) => state);
+  const available = useSelector((state) => state);
+
+
+  useEffect(() => {
+    console.log(route.params);
+    console.log(available);
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,7 +21,7 @@ export default SubmitScreen = ({ navigation }) => {
         <Text>'dddddddddd'</Text>
       </View>
       <View style={styles.button}>
-        <Button title="Submit" onPress={() => {}} />
+        <Button title="Submit" onPress={() => { }} />
       </View>
     </SafeAreaView>
   );

@@ -1,15 +1,36 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useDispatch } from 'react-redux';
-
+import { Button } from 'react-native-elements';
+import { HeaderBackButton } from '@react-navigation/stack';
 import { QrValidation } from '../store/actions/AuthAction';
 
-export default function QrScreen() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
-  const [data, setData] = useState(null);
-  const dispatch = useDispatch();
+export default function QrScreen({ navigation, route }) {
+  const [HasPermission, setHasPermission] = useState(null);
+  const [Scanned, setScanned] = useState(false);
+  const [Toggle, setToggle] = useState(false);
+
+  const [Input, setInput] = useState('');
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: (props) => (
+        <HeaderBackButton
+          {...props}
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        />
+      ),
+    });
+    navigation.setOptions({
+      title: 'VALIDATE QR',
+      headerStyle: {
+        backgroundColor: '#dffff0',
+      },
+    });
+  }, [navigation]);
 
   useEffect(() => {
     (async () => {
@@ -18,39 +39,96 @@ export default function QrScreen() {
     })();
   }, []);
 
-  useEffect(() => {
-    if (data) dispatch(QrValidation(data));
-    return () => {};
-  }, [data]);
-
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setData(data);
+    if (type === 256) {
+      setScanned(true);
+      setInput(data);
+    } else {
+      setScanned(false);
+    }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+  const QrScanner = () => {
+    if (HasPermission === null || HasPermission === false) {
+      return (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <View style={{ width: '50%', marginBottom: 50, alignSelf: 'center' }}>
+            <Button
+              buttonStyle={{ borderRadius: 20 }}
+              containerViewStyle={{
+                width: '100%',
+                marginLeft: 0,
+                marginRight: 0,
+              }}
+              title="Go Back"
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}
+            />
+          </View>
+        </View>
+      );
+    }
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <BarCodeScanner
+          onBarCodeScanned={Scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}
-    >
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
+        {Scanned && (
+          <View style={{ width: '50%', marginBottom: 50, alignSelf: 'center' }}>
+            <Button
+              buttonStyle={{ borderRadius: 20 }}
+              containerViewStyle={{
+                width: '100%',
+                marginLeft: 0,
+                marginRight: 0,
+              }}
+              title="Scan Again"
+              onPress={() => {
+                setScanned(false);
+              }}
+            />
+          </View>
+        )}
+        <View style={{ width: '50%', marginBottom: 50, alignSelf: 'center' }}>
+          <Button
+            buttonStyle={{ borderRadius: 20 }}
+            containerViewStyle={{
+              width: '100%',
+              marginLeft: 0,
+              marginRight: 0,
+            }}
+            title="Go Back"
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          />
+        </View>
+      </View>
+    );
+  };
 
-      {scanned && (
-        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
-      )}
-    </View>
-  );
-}
+  return <QrScanner />;
+};
+const styles = StyleSheet.create({
+  MainContainer: {
+    flex: 1,
+    margin: 10,
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+});
