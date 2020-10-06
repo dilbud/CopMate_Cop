@@ -13,18 +13,18 @@ import { Button, Input, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const list_ori = [
-  { id: '1', state: 'රිය පැදවීමේදී ආරක්ෂිත හිස් ආවරණ පැළඳීමට අසමත් වීම  දඩ ගාස්තුව', amount: '1000', check: false },
-  { id: '2', state: 'චලනය වන වාහනයකින් දැන්වීම් බෙදා හැරීම තහනම් කිරීම දඩ ගාස්තුව', amount: ' 1000', check: false },
-  { id: '3', state: 'වාහනයකින් ශබ්දය අධික ලෙස භාවිතා කිරීම තහනම් දඩ ගාස්තුව', amount: '1000', check: false },
-  { id: '4', state: 'පොලිස් නිලධාරීන්ගේ උපදෙස් වලට කීකරු වීමට අපොහොසත් වීම දඩ ගාස්තු', amount: '2000', check: false },
-  { id: '5', state: '05', amount: '500', check: false },
-  { id: '6', state: '06', amount: '200', check: false },
-  { id: '7', state: '07', amount: '2500', check: false },
-  { id: '8', state: '08', amount: '1500', check: false },
-  { id: '9', state: '09', amount: '3500', check: false },
-  { id: '10', state: '10', amount: '4500', check: false },
-  { id: '11', state: '11', amount: '500', check: false },
-  { id: '12', state: '12', amount: '200', check: false },
+  { id: '1', state: 'රිය පැදවීමේදී ආරක්ෂිත හිස් ආවරණ පැළඳීමට අසමත් වීම  දඩ ගාස්තුව: 1000', amount: '1000', check: false },
+  { id: '2', state: 'චලනය වන වාහනයකින් දැන්වීම් බෙදා හැරීම තහනම් කිරීම දඩ ගාස්තුව: 1000', amount: ' 1000', check: false },
+  { id: '3', state: 'වාහනයකින් ශබ්දය අධික ලෙස භාවිතා කිරීම තහනම් දඩ ගාස්තුව: 1000', amount: '1000', check: false },
+  { id: '4', state: 'ආදායම් බලපත්‍රයේ විධිවිධානවලට පටහැනිව මෝටර් රථය භාවිතා කිරීම තහනම් කිරීම දඩ ගාස්තුව: 500', amount: '500', check: false },
+  { id: '5', state: 'විමෝචන සහතිකය හෝ යෝග්‍යතා සහතිකය වාහනයේ රැගෙන යාමට අපොහොසත් වීම දඩ ගාස්තුව: 500', amount: '500', check: false },
+  { id: '6', state: 'ටැංකියට ඉන්ධන බැහැර කිරීමේදී පූර්වාරක්ෂාව ගැනීමට අපොහොසත් වීම දඩ ගාස්තුව: 1000', amount: '1000', check: false },
+  { id: '7', state: 'මෝටර් වාහනය නවත්වන විට හෝ නොපෙනී යන විට හෝ මාර්ගයක අක්‍රීය වූ විට ගත යුතු පියවර කඩකිරීම දඩ ගාස්තුව: 2000', amount: '2000', check: false },
+  { id: '8', state: 'බලයලත් සංඛ්‍යාවට වඩා වැඩි ප්‍රමාණයක් හෝ පුද්ගලික ගමන් මලු හැර වෙනත් භාණ්ඩ ප්‍රවාහනය කිරීම දඩ ගාස්තුව: 500', amount: '500', check: false },
+  { id: '9', state: 'රෙගුලාසි උල්ලන්ගනය කිරීම දඩ ගාස්තුව: 1000', amount: '1000', check: false },
+  { id: '10', state: 'ආදායම් බලපත්‍රය මෝටර් රථවල ප්‍රදර්ශනය කර අවශ්‍ය විටෙක ඉදිරිපත්  කිරීම දඩ ගාස්තුව: 1000', amount: '1000', check: false },
+  { id: '11', state: 'පොලිස් නිලධාරීන්ගේ උපදෙස් හා සං වලට කීකරු වීමට අපොහොසත් වීම දඩ ගාස්තුව: 2000', amount: '2000', check: false },
+  { id: '12', state: 'මාර්ග සං signs ා වලට අනුකූල නොවීම දඩ ගාස්තුව: 1000', amount: '1000', check: false },
 ];
 
 

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from "../store/actions/AuthAction";
+
 
 import {
   DrawerContentScrollView,
@@ -10,7 +13,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default DrawerContent = (props) => {
-  const [signOut, setSignOut] = useState(false);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.Auth);
 
   return (
     <View style={{ flex: 1 }}>
@@ -19,8 +23,8 @@ export default DrawerContent = (props) => {
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <View style={{ marginLeft: 15, flexDirection: 'column' }}>
-                <Text style={styles.title}>John Doe</Text>
-                <Text style={styles.caption}>@j_doe</Text>
+                <Text style={styles.title}>{`${auth.user.lastName} ${auth.user.firstName}`}</Text>
+                <Text style={styles.caption}>{auth.user.email}</Text>
               </View>
             </View>
           </View>
@@ -37,7 +41,7 @@ export default DrawerContent = (props) => {
           )}
           label="Sign Out"
           onPress={() => {
-            setSignOut(true);
+            dispatch(signout());
           }}
         />
       </View>

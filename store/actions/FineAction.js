@@ -19,7 +19,7 @@ export const setForm = (nic, licenseId) => {
         if (res.data.msg) {
           dispatch({
             type: SET_FORM,
-            payload: { nic, licenseId, name: res.data.name },
+            payload: { nic, licenseId, name: res.data.msg.name },
           });
           navigate('fine');
         } else {
@@ -61,6 +61,41 @@ export const setState = (email, password) => {
       payload: {
         token: 'token',
       },
+    });
+  };
+};
+
+
+export const submit = (data) => {
+  return (dispatch, getState) => {
+    const current = getState();
+    axios
+      .post('/fine/validLicense', { nic, licenseId })
+      .then((res) => {
+        console.log('output', res.data.msg);
+        if (res.data.msg) {
+          dispatch({
+            type: SET_FORM,
+            payload: { nic, licenseId, name: res.data.msg.name },
+          });
+          navigate('fine');
+        } else {
+          Alert.alert('licence validation', 'licence not found');
+          dispatch({
+            type: RESET,
+          });
+          navigate('form');
+        }
+      })
+      .catch((error) => {
+        console.log('form : ', error);
+        dispatch({
+          type: RESET,
+        });
+        navigate('form');
+      });
+    dispatch({
+      type: SUBMIT
     });
   };
 };

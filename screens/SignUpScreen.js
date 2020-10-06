@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-
 import { Button, Text, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../store/actions/AuthAction';
 import alert from './AlertScreen';
 
-export default SignUpScreen = ({ navigation }) => {
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
-  const [Name, setName] = useState('');
+export default LoginScreen = ({ navigation }) => {
+  const [Email, setEmail] = useState('kumara@gmail.com');
+  const [Password, setPassword] = useState('123456789');
   const [ToggleSecure, setToggleSecure] = useState(true); // is secure
   const [ToggleEye, setToggleEye] = useState('eye-slash');
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state.Auth);
 
@@ -22,7 +20,7 @@ export default SignUpScreen = ({ navigation }) => {
   }, [ToggleSecure]);
 
   const send = () => {
-    if (Email === '' || Password === '' || Name === '') {
+    if (Email === '' || Password === '') {
       alert('Form', 'Empty details');
       setPassword('');
       return;
@@ -34,17 +32,18 @@ export default SignUpScreen = ({ navigation }) => {
       return;
     }
     if (Password.length < 6) {
-      alert('Password', 'Password too weak least 6 character');
+      alert('Password', 'Password least 6 character');
       setPassword('');
       return;
     }
+    navigation.navigate('QR', { Email, Password });
     setPassword('');
   };
 
   return (
     <View style={styles.container}>
       <Text h4 style={styles.titleText}>
-        Join with CopMate
+        Join With CopMate
       </Text>
       <Input
         value={Email}
@@ -71,20 +70,13 @@ export default SignUpScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry={ToggleSecure}
       />
-      {/* <Input
-        value={Name}
-        placeholder="Name"
-        label="Name"
-        leftIcon={<Icon name="user" size={24} color="#818181" />}
-        onChangeText={setName}
-      /> */}
       <View style={styles.login}>
         <Button
           buttonStyle={{ borderRadius: 20 }}
           containerViewStyle={{ width: '100%', marginLeft: 0, marginRight: 0 }}
           title="SIGNUP"
           onPress={() => {
-            navigation.navigate('QR');
+            send();
           }}
         />
       </View>
@@ -93,7 +85,7 @@ export default SignUpScreen = ({ navigation }) => {
           containerViewStyle={{ marginTop: 20 }}
           buttonStyle={styles.join}
           type="clear"
-          title="Or login Now"
+          title="Or? login here"
           onPress={() => {
             navigation.navigate('Login');
           }}

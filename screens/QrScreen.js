@@ -13,6 +13,8 @@ export default function QrScreen({ navigation, route }) {
 
   const [Input, setInput] = useState('');
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     navigation.setOptions({
       headerLeft: (props) => (
@@ -30,7 +32,7 @@ export default function QrScreen({ navigation, route }) {
         backgroundColor: '#dffff0',
       },
     });
-  }, [navigation]);
+  }, [navigation, route]);
 
   useEffect(() => {
     (async () => {
@@ -42,39 +44,38 @@ export default function QrScreen({ navigation, route }) {
   const handleBarCodeScanned = ({ type, data }) => {
     if (type === 256) {
       setScanned(true);
-      setInput(data);
+      dispatch(QrValidation(data, route.params.Email, route.params.Password));
     } else {
       setScanned(false);
     }
   };
 
-  const QrScanner = () => {
-    if (HasPermission === null || HasPermission === false) {
-      return (
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <View style={{ width: '50%', marginBottom: 50, alignSelf: 'center' }}>
-            <Button
-              buttonStyle={{ borderRadius: 20 }}
-              containerViewStyle={{
-                width: '100%',
-                marginLeft: 0,
-                marginRight: 0,
-              }}
-              title="Go Back"
-              onPress={() => {
-                navigation.navigate('SignUp');
-              }}
-            />
-          </View>
+  if (HasPermission === null || HasPermission === false) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <View style={{ width: '50%', marginBottom: 50, alignSelf: 'center' }}>
+          <Button
+            buttonStyle={{ borderRadius: 20 }}
+            containerViewStyle={{
+              width: '100%',
+              marginLeft: 0,
+              marginRight: 0,
+            }}
+            title="Go Back"
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          />
         </View>
-      );
-    }
+      </View>
+    );
+  } else {
     return (
       <View
         style={{
@@ -120,9 +121,7 @@ export default function QrScreen({ navigation, route }) {
         </View>
       </View>
     );
-  };
-
-  return <QrScanner />;
+  }
 };
 const styles = StyleSheet.create({
   MainContainer: {

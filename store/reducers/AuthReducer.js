@@ -2,6 +2,7 @@ import { LOGIN, SIGNUP, LOGOUT } from '../actions/AuthAction';
 
 const initialState = {
   userId: null,
+  user: {}
 };
 
 export default (state = initialState, action) => {
@@ -9,8 +10,7 @@ export default (state = initialState, action) => {
     case LOGOUT:
       return initialState;
     case LOGIN:
-      console.log(action.payload);
-      return initialState;
+      return { ...state, userId: action.payload.id, user: action.payload.user };
     default:
       return state;
   }
