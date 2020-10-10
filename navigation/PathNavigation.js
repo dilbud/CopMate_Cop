@@ -15,7 +15,7 @@ export default PathNavigation = () => {
       console.log(auth);
       setisSignedIn(true);
     } else {
-      console.log(auth, '//////////////////////');
+      console.log(auth, 'pathNavigation');
       setisSignedIn(false);
     }
   }, [auth])

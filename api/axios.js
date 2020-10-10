@@ -3,7 +3,7 @@ import axios from 'axios';
 const AUTH_TOKEN = 'dddddddd';
 
 const instance = axios.create({
-  baseURL: 'http://192.168.8.104:3000/app',
+  baseURL: 'http://192.168.1.100:3000/app',
   timeout: 1000 * 5,
 });
 

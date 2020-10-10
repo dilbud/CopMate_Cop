@@ -66,36 +66,32 @@ export const setState = (email, password) => {
 };
 
 
-export const submit = (data) => {
+export const submit = (list) => {
   return (dispatch, getState) => {
     const current = getState();
+    console.log(current, list, '-------------------');
     axios
-      .post('/fine/validLicense', { nic, licenseId })
+      .post('/fine/setFine', { current, list })
       .then((res) => {
         console.log('output', res.data.msg);
         if (res.data.msg) {
           dispatch({
-            type: SET_FORM,
-            payload: { nic, licenseId, name: res.data.msg.name },
+            type: SUBMIT
           });
-          navigate('fine');
+          Alert.alert('Fine', 'Fine Submit success');
+          navigate('form');
         } else {
-          Alert.alert('licence validation', 'licence not found');
+          Alert.alert('Error', 'Fine Not Submit');
           dispatch({
             type: RESET,
           });
-          navigate('form');
         }
       })
       .catch((error) => {
-        console.log('form : ', error);
+        Alert.alert('Error', 'Fine Not Submit');
         dispatch({
           type: RESET,
         });
-        navigate('form');
       });
-    dispatch({
-      type: SUBMIT
-    });
   };
 };

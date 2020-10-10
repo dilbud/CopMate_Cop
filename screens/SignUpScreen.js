@@ -7,8 +7,8 @@ import { signup } from '../store/actions/AuthAction';
 import alert from './AlertScreen';
 
 export default LoginScreen = ({ navigation }) => {
-  const [Email, setEmail] = useState('kumara@gmail.com');
-  const [Password, setPassword] = useState('123456789');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
   const [ToggleSecure, setToggleSecure] = useState(true); // is secure
   const [ToggleEye, setToggleEye] = useState('eye-slash');
 

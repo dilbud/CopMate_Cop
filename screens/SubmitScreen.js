@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { FlatList } from 'react-native';
 import { Input, Button, ListItem } from 'react-native-elements';
+import { submit } from "../store/actions/FineAction";
 
 export default SubmitScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default SubmitScreen = ({ navigation, route }) => {
           justifyContent: "space-between",
           marginBottom: 5
         }}>
-          <Text style={{ fontSize: 18 }}>LicenseId:</Text><Text style={{ fontSize: 18 }}>{available.licenseId}</Text>
+          <Text style={{ fontSize: 18 }}>LicenseId:</Text><Text style={{ fontSize: 18 }}>{'123458568515'}</Text>
         </View>
 
         <View style={{
@@ -41,7 +42,7 @@ export default SubmitScreen = ({ navigation, route }) => {
           justifyContent: "space-between",
           marginBottom: 5
         }}>
-          <Text style={{ fontSize: 18 }}>NIC:</Text><Text style={{ fontSize: 18 }}>{available.nic}</Text>
+          <Text style={{ fontSize: 18 }}>NIC:</Text><Text style={{ fontSize: 18 }}>{'942251546V'}</Text>
         </View>
       </View>
       <FlatList
@@ -64,6 +65,12 @@ export default SubmitScreen = ({ navigation, route }) => {
           containerViewStyle={{ width: '100%', marginLeft: 0, marginRight: 0 }}
           title="SUBMIT"
           onPress={() => {
+            const list = route.params.fine.filter((v, i) => {
+              return v.check;
+            });
+
+            dispatch(submit(list));
+
           }}
         />
       </View>

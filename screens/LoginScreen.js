@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../store/actions/AuthAction';
+import { login } from '../store/actions/AuthAction';
 import alert from './AlertScreen';
 
 export default LoginScreen = ({ navigation }) => {
@@ -36,7 +36,7 @@ export default LoginScreen = ({ navigation }) => {
       setPassword('');
       return;
     }
-    dispatch(signin(Email, Password));
+    dispatch(login(Email, Password));
     setPassword('');
   };
 
